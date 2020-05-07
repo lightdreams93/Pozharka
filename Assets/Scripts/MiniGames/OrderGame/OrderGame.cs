@@ -19,7 +19,7 @@ public class OrderGame : MonoBehaviour
     [SerializeField] private GameObject _winPanel;
     [SerializeField] private Image _winImage;
 
-    [SerializeField] private Healthbar _healthbar;
+    //[SerializeField] private Healthbar _healthbar;
 
     [SerializeField] private TodoList _todoList;
 
@@ -53,7 +53,7 @@ public class OrderGame : MonoBehaviour
 
     private void OrderGame_OnOrderGameLose()
     {
-        _healthbar.MultiplyPauseSpeed();
+        //_healthbar.MultiplyPauseSpeed();
         ResetTimer();
         _orderCards = MixCard(_orderCards);
         DisplayCards();
@@ -126,7 +126,7 @@ public class OrderGame : MonoBehaviour
     public void EndGame()
     {
         _gameStart = false;
-        _healthbar.ResumeSpeed();
+        //_healthbar.ResumeSpeed();
     }
 
     private void StartTimer()
@@ -137,12 +137,12 @@ public class OrderGame : MonoBehaviour
         {
             _orderCards = MixCard(_orderCards);
             _currentTime = _timer;
-            _healthbar.MultiplyPauseSpeed();
+            //_healthbar.MultiplyPauseSpeed();
             DisplayCards();
         }
         DisplayTimer();
 
-        _healthbar.PauseSpeed();
+        //_healthbar.PauseSpeed();
     }
 
     private void ResetTimer()
@@ -170,8 +170,7 @@ public class OrderGame : MonoBehaviour
             orderCards[randomCardIndex] = currentCard;
         }
         return orderCards;
-    }
-
+    } 
 
     private bool isGameWin()
     {

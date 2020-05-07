@@ -64,7 +64,7 @@ public class Healthbar : MonoBehaviour
     public void PauseSpeed()
     {
         _pauseSpeed = _currentSpeed;
-        _currentSpeed = _speed/2;
+        _currentSpeed = 0;
     }
 
     public void ResumeSpeed()
@@ -75,6 +75,24 @@ public class Healthbar : MonoBehaviour
     public void MultiplyPauseSpeed()
     {
         _pauseSpeed *= (1  + 1 / _todoList.TodoListArr.Length);
+    }
+
+
+    public void DecreaseHealth(float value)
+    {
+        float temp = _currentHealth - value;
+
+        if (temp >= 0)
+        {
+            _currentHealth -= value;
+        }
+        else
+        {
+            _currentHealth = 0;
+            OnVictumDie?.Invoke();
+        }
+
+        DisplayHealth();
     }
 
     private void DecreaseHealth()
@@ -96,6 +114,8 @@ public class Healthbar : MonoBehaviour
     {
         _currentSpeed *= (1 + 1 / (float)_todoList.TodoListArr.Length);
     }
+
+    
 
     public void UndoSpeed()
     {

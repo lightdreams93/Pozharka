@@ -40,8 +40,11 @@ public class Raiting : MonoBehaviour
 
     private void DecreaseStar()
     {
-        if(_countStars > 0)
-            _countStars = _countStars - 1/ (float)_todoList.TodoListArr.Length;
+        float temp = _countStars - 1 / (float)_todoList.TodoListArr.Length;
+        if (temp > 0)
+            _countStars = _countStars - 1 / (float)_todoList.TodoListArr.Length;
+        else
+            _countStars = 0;
     }
 
     private void DisplayStars()
@@ -51,7 +54,7 @@ public class Raiting : MonoBehaviour
             GameObject starObj = _stars.transform.GetChild(i).gameObject;
             Image star = starObj.transform.GetChild(1).GetComponent<Image>();
             
-            if (i < Mathf.Round(_countStars))
+            if (i < Mathf.FloorToInt(_countStars))
             {
                 starObj.transform.GetChild(0).gameObject.SetActive(true);
                 star.sprite = _activeStar;
