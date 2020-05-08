@@ -7,7 +7,7 @@ class GenerateGuids
     [MenuItem("Tools/GenerateGuids")]
     static void Generate()
     {
-        Object[] resourcesObjects = Resources.LoadAll("/Items");
+        Object[] resourcesObjects = Resources.LoadAll("Items");
 
         foreach (var obj in resourcesObjects)
         {

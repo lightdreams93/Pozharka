@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -11,7 +12,9 @@ public class GameManager : MonoBehaviour
     public static bool isLevelStarted;
 
     private void Start()
-    {  
+    {
+        isLevelStarted = false;
+
         Healthbar.OnVictumDie += Healthbar_OnVictumDie;
         TodoList.OnAllTaskDone += TodoList_OnAllTaskDone;
     } 

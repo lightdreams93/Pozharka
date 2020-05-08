@@ -104,6 +104,7 @@ public class Healthbar : MonoBehaviour
         else
         {
             _currentHealth = 0;
+            _currentSpeed = 0;
             OnVictumDie?.Invoke();
         }
 
