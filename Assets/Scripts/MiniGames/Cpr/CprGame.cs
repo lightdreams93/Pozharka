@@ -8,6 +8,7 @@ public class CprGame : MonoBehaviour
     [SerializeField] private float _maxCountHeart;
     [SerializeField] private float _maxCountMouth;
     [SerializeField] private float _maxCountCycles;
+    [SerializeField] private float _minTempo;
 
     [SerializeField] private GameObject _game;
 
@@ -21,6 +22,7 @@ public class CprGame : MonoBehaviour
     [SerializeField] private Text _countMouth;
     [SerializeField] private Text _countCyclesText;
     [SerializeField] private Text _timerText;
+    [SerializeField] private Text _tempoText;
 
     [SerializeField] private float _delayHideBtn;
     [SerializeField] private float _delayShowBtn;
@@ -35,6 +37,7 @@ public class CprGame : MonoBehaviour
     private bool _isGameStart;
 
     private float _timer;
+    private int _tempo;
 
     private void StartTimer()
     {
@@ -76,6 +79,8 @@ public class CprGame : MonoBehaviour
         DisplayHearts();
         DisplayCycles();
         //StartCoroutine(ActivateRandomTask());
+        DisplayTempo(_tempo);
+        StartCoroutine(CheckTempo());
     }
 
     
@@ -136,6 +141,7 @@ public class CprGame : MonoBehaviour
         _countHeartTouches = 0;
         _countMouthTouches = 0;
         _countCycles = 0;
+        _prevCount = 0;
         DisplayHearts();
         DisplayMouth();
         DisplayCycles();
@@ -148,6 +154,7 @@ public class CprGame : MonoBehaviour
             _countCycles++;
             _countHeartTouches = 0;
             _countMouthTouches = 0;
+            _prevCount = 0;
             DisplayMouth();
             DisplayHearts();
             DisplayCycles();
@@ -218,5 +225,49 @@ public class CprGame : MonoBehaviour
     private void Update()
     {
         StartTimer();
+    }
+
+    private int _prevCount;
+    private float _prevTimer;
+
+    private IEnumerator CheckTempo()
+    {
+        while(true)
+        {
+            if (_countHeartTouches > 0)
+            {
+                if (_prevCount < _countHeartTouches)
+                {
+                    if (_prevCount == 0)
+                    {
+                        _prevTimer = _timer;
+                        _prevCount = _countHeartTouches;
+                    }
+                    else
+                    {
+                        float lessTime = _timer - _prevTimer;
+                        int count = _countHeartTouches - _prevCount;
+
+                        float tempo = (float)count * 60 / lessTime;
+                        _tempo = Mathf.RoundToInt(tempo);
+
+                        if (_tempo < _minTempo || _tempo > _minTempo * 2)
+                            healthbar.DecreaseHealth(5);
+
+                        DisplayTempo(_tempo);
+
+                        _prevCount = 0;
+                    }
+                }
+                yield return new WaitForSeconds(0.02f);
+            }
+
+            yield return null;
+        }
+    }
+
+    private void DisplayTempo(int temp)
+    {
+        _tempoText.text = $"{temp} <size=12>уд/мин</size>";
     }
 }
