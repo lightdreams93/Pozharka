@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cab1379547db9eb469c73e6b11b0a63e, type: 3}
-  m_Name: Zhgut
+  m_Name: WaterGlass
   m_EditorClassIdentifier: 
-  guid: 0d0bead8e3233f7448842c9efe4bd3ac
-  _isMiniGame: 1
-  _icon: {fileID: 21300000, guid: 626935442c05d9e40bbb78265a8ce991, type: 3}
-  _description: "\u0416\u0433\u0443\u0442"
+  guid: 385c8e31f04d005409d884bf30c9b052
+  _isMiniGame: 0
+  _icon: {fileID: 21300000, guid: 4a45b40f6aba9d548a3d6a91df8b33b9, type: 3}
+  _description: "\u0421\u0442\u0430\u043A\u0430\u043D \u0432\u043E\u0434\u044B"

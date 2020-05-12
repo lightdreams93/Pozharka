@@ -7,7 +7,10 @@ public class TooltipMessage : MonoBehaviour
 {
     [SerializeField] private Text _tooltipText;
     [SerializeField] private GameObject _tooltipPanel;
- 
+
+    [SerializeField] private Text _taskText;
+    [SerializeField] private GameObject _taskPanel;
+
     private void Start()
     {
         SetTextUI(null);
@@ -41,12 +44,15 @@ public class TooltipMessage : MonoBehaviour
 
     public void SetText(TooltipText text)
     {
-        SetTextUI(text.Text);
-        StartAnimation();
+        SetTextUI(text.Text, true);
+        _taskPanel.SetActive(true);
+        _taskText.gameObject.SetActive(true);
     }
 
     public void SetText(string text)
     {
+        _taskPanel.SetActive(false);
+        _taskText.gameObject.SetActive(false);
         SetTextUI(text);
         StartAnimation();
     }
@@ -60,8 +66,14 @@ public class TooltipMessage : MonoBehaviour
         _tooltipText.gameObject.SetActive(true);
     }
 
-    private void SetTextUI(string text)
+    private void SetTextUI(string text, bool task = false)
     {
+        if (task)
+        {
+            _taskText.text = text;
+            return;
+        }
+
         _tooltipText.text = text;
     }
 }

@@ -19,6 +19,8 @@ public class Healthbar : MonoBehaviour
     private float _currentSpeed;
     private float _pauseSpeed;
 
+    public float CurrentHealth => _currentHealth;
+
     private void Start()
     {
         _currentHealth = _health;

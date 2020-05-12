@@ -81,9 +81,20 @@ public class CprGame : MonoBehaviour
         //StartCoroutine(ActivateRandomTask());
         DisplayTempo(_tempo);
         StartCoroutine(CheckTempo());
+
+
+        Healthbar.OnVictumDie += Healthbar_OnVictumDie;
     }
 
-    
+    private void OnDestroy()
+    {
+        Healthbar.OnVictumDie -= Healthbar_OnVictumDie;
+    }
+
+    private void Healthbar_OnVictumDie()
+    {
+        _game.SetActive(false);
+    }
 
     private void DisplayHearts()
     {

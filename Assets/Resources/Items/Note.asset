@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cab1379547db9eb469c73e6b11b0a63e, type: 3}
-  m_Name: Zhgut
+  m_Name: Note
   m_EditorClassIdentifier: 
-  guid: 0d0bead8e3233f7448842c9efe4bd3ac
-  _isMiniGame: 1
-  _icon: {fileID: 21300000, guid: 626935442c05d9e40bbb78265a8ce991, type: 3}
-  _description: "\u0416\u0433\u0443\u0442"
+  guid: 835fe5e357ab0ca4d90d335b16f4ee2b
+  _isMiniGame: 0
+  _icon: {fileID: 21300000, guid: f2f74bd7bb5e98744a1f38b67b9c9bc2, type: 3}
+  _description: "\u0417\u0430\u043F\u0438\u0441\u043A\u0430 (\u0432\u0440\u0435\u043C\u044F
+    \u043D\u0430\u043B\u043E\u0436\u0435\u043D\u0438\u044F \u0436\u0433\u0443\u0442\u0430)"
