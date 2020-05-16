@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Water
   m_EditorClassIdentifier: 
   guid: dbe0065f3d86da549a896e8d6ec779c6
-  _isMiniGame: 0
+  _isMiniGame: 1
   _icon: {fileID: 21300000, guid: e8a071fe3d10a964a88dbdc308f8d05a, type: 3}
   _description: "\u0412\u043E\u0434\u0430"
