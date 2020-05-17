@@ -70,7 +70,6 @@ public class NatiraemMuzhika : MonoBehaviour
         }
 
         percent = Mathf.RoundToInt((currentOpacity / totalOpacity) * 100);
-        Debug.Log($"{currentOpacity} - {totalOpacity}");
     }
 
     private void Update()

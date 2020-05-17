@@ -81659,6 +81659,16 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 461
       objectReference: {fileID: 0}
+    - target: {fileID: 23329289922758508, guid: 8e00364320862a746a6e67a5af5e5979,
+        type: 3}
+      propertyPath: m_Materials.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9386556c9dbcc05478e51d6895b381f6, type: 2}
+    - target: {fileID: 23329289922758508, guid: 8e00364320862a746a6e67a5af5e5979,
+        type: 3}
+      propertyPath: m_Materials.Array.data[3]
+      value: 
+      objectReference: {fileID: 2100000, guid: c79f68e168f8a694eb4c34c37b7c03d5, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8e00364320862a746a6e67a5af5e5979, type: 3}
 --- !u!4 &1660875997 stripped
@@ -96885,18 +96895,7 @@ MonoBehaviour:
           m_CallState: 2
     OnItemUse:
       m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 276382750}
-          m_MethodName: StartGame
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
+        m_Calls: []
     OnItemDisabled:
       m_PersistentCalls:
         m_Calls:
@@ -96950,18 +96949,7 @@ MonoBehaviour:
           m_CallState: 2
     OnItemUse:
       m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1221171930}
-          m_MethodName: StartGame
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 1
-          m_CallState: 2
+        m_Calls: []
     OnItemDisabled:
       m_PersistentCalls:
         m_Calls:
@@ -103313,6 +103301,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 689423377}
     m_Modifications:
+    - target: {fileID: 1555850710414244, guid: 8e00364320862a746a6e67a5af5e5979, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4790015206267544, guid: 8e00364320862a746a6e67a5af5e5979, type: 3}
       propertyPath: m_LocalPosition.x
       value: -15.895081
@@ -103345,6 +103337,16 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 22
       objectReference: {fileID: 0}
+    - target: {fileID: 23329289922758508, guid: 8e00364320862a746a6e67a5af5e5979,
+        type: 3}
+      propertyPath: m_Materials.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9386556c9dbcc05478e51d6895b381f6, type: 2}
+    - target: {fileID: 23329289922758508, guid: 8e00364320862a746a6e67a5af5e5979,
+        type: 3}
+      propertyPath: m_Materials.Array.data[3]
+      value: 
+      objectReference: {fileID: 2100000, guid: c79f68e168f8a694eb4c34c37b7c03d5, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8e00364320862a746a6e67a5af5e5979, type: 3}
 --- !u!4 &2125585723 stripped
