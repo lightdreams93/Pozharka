@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Raiting : MonoBehaviour
@@ -25,6 +26,7 @@ public class Raiting : MonoBehaviour
     private void TodoList_OnAllTaskDone()
     {
         DisplayStars();
+        SaveRaiting();
     }
 
     private void OnDestroy()
@@ -65,5 +67,85 @@ public class Raiting : MonoBehaviour
                 star.sprite = _disabledStar;
             }
         }
+    }
+
+    private void SaveRaiting()
+    {
+        LevelsRaiting levelsRaiting = GetLevelsRaiting();
+
+        string sceneName = SceneManager.GetActiveScene().name;
+        string[] arr = sceneName.Split('-');
+
+        int numPart = int.Parse(arr[0]);
+        int numLevel = int.Parse(arr[1]);
+
+        LevelRaiting lvlRaiting = GetLevelRaiting(levelsRaiting.levelsRaitingList, numPart, numLevel);
+
+        if (lvlRaiting != null)
+        {
+            if (Mathf.FloorToInt(_countStars) > lvlRaiting.countStars)
+                lvlRaiting.countStars = Mathf.FloorToInt(_countStars);
+        }
+        else
+        {
+            levelsRaiting.levelsRaitingList.Add(new LevelRaiting(numPart, numLevel, Mathf.FloorToInt(_countStars)));
+        }
+
+        string data = JsonUtility.ToJson(levelsRaiting);
+        Debug.Log(data);
+
+        PlayerPrefs.SetString("Raiting", data);
+    }
+
+    private LevelRaiting GetLevelRaiting(List<LevelRaiting> levelsRaitingList, int numPart, int numLevel)
+    {
+        for (int i = 0; i < levelsRaitingList.Count; i++)
+        {
+            if (levelsRaitingList[i].numPart == numPart)
+            {
+                if (levelsRaitingList[i].numLevel == numLevel)
+                {
+                    return levelsRaitingList[i];
+                }
+            }
+        }
+        return null;
+    }
+
+    private LevelsRaiting GetLevelsRaiting()
+    {
+        if (PlayerPrefs.HasKey("Raiting"))
+            return JsonUtility.FromJson<LevelsRaiting>(PlayerPrefs.GetString("Raiting"));
+
+        return new LevelsRaiting();
+    }
+
+}
+
+
+[System.Serializable]
+public class LevelsRaiting
+{
+    public List<LevelRaiting> levelsRaitingList;
+
+    public LevelsRaiting()
+    {
+        levelsRaitingList = new List<LevelRaiting>();
+    }
+}
+
+
+[System.Serializable]
+public class LevelRaiting
+{
+    public int numPart;
+    public int numLevel;
+    public int countStars;
+
+    public LevelRaiting(int numPart, int numLevel, int countStars)
+    {
+        this.numPart = numPart;
+        this.numLevel = numLevel;
+        this.countStars = countStars;
     }
 }
