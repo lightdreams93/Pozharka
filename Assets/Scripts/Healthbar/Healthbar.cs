@@ -28,9 +28,7 @@ public class Healthbar : MonoBehaviour
 
         DisplayHealth();
 
-        TodoList.OnTaskDone += TodoList_OnTaskDone;
         TodoList.OnTaskFailed += TodoList_OnTaskFailed;
-
         TodoList.OnAllTaskDone += TodoList_OnAllTaskDone;
     }
 
@@ -43,17 +41,10 @@ public class Healthbar : MonoBehaviour
     {
         DecreaseHealth(10);
     }
-
-    private void TodoList_OnTaskDone(ItemConfig obj)
-    {
-        
-    }
       
     private void OnDestroy()
     {
-        TodoList.OnTaskDone -= TodoList_OnTaskDone;
         TodoList.OnTaskFailed -= TodoList_OnTaskFailed;
-
         TodoList.OnAllTaskDone -= TodoList_OnAllTaskDone;
     }
 
@@ -74,17 +65,9 @@ public class Healthbar : MonoBehaviour
         _currentSpeed = _pauseSpeed;
     }
 
-    //public void MultiplyPauseSpeed()
-    //{
-    //    _pauseSpeed *= (1  + 1 / _todoList.TodoListArr.Length);
-    //}
-
-
     public void DecreaseHealth(float value)
     {
-        
         float temp = _currentHealth - value;
-        Debug.Log(temp);
 
         if (temp >= 0)
         {
@@ -114,21 +97,6 @@ public class Healthbar : MonoBehaviour
 
         DisplayHealth();
     }
-
-    //public void MultiplySpeed()
-    //{
-    //    _currentSpeed *= (1 + 1 / (float)_todoList.TodoListArr.Length);
-    //}
-
-    //public void UndoSpeed()
-    //{
-    //    float speed = _currentSpeed / (1  + 1 / (float)_todoList.TodoListArr.Length);
-
-    //    if (speed < _speed)
-    //        _currentSpeed = _speed;
-    //    else
-    //        _currentSpeed = speed;
-    //}
 
     private void DisplayHealth()
     {

@@ -8,11 +8,15 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject _gameOverPanel;
     [SerializeField] private GameObject _winPanel;
 
-    public static bool isLevelStarted; 
+    public static bool isLevelStarted;
+
+    private TodoList[] _todoLists;
 
     private void Start()
     {
         isLevelStarted = false;
+
+        _todoLists = FindObjectsOfType<TodoList>();
 
         Healthbar.OnVictumDie += Healthbar_OnVictumDie;
         TodoList.OnAllTaskDone += TodoList_OnAllTaskDone;
@@ -25,7 +29,21 @@ public class GameManager : MonoBehaviour
 
     private void TodoList_OnAllTaskDone()
     {
-        _winPanel.SetActive(true);
+        if(CheckWin())
+        {
+            _winPanel.SetActive(true);
+            Debug.Log("!!!!!");
+        }
+    }
+
+    private bool CheckWin()
+    {
+        for (int i = 0; i < _todoLists.Length; i++)
+        {
+            if (!_todoLists[i].IsAllTasksDone)
+                return false;
+        }
+        return true;
     }
 
     private void Healthbar_OnVictumDie()

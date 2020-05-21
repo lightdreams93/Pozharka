@@ -33617,6 +33617,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _todoList:
   - _config: {fileID: 11400000, guid: 425adb04cb09015418c2af3b3e8bb2cf, type: 2}
+  OnAllTasksDone:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &721182595
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -90945,6 +90948,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _instruments:
   - _config: {fileID: 11400000, guid: cc65979582b4f1b42bb55d15770777c4, type: 2}
+    count: 1
     OnItemActive:
       m_PersistentCalls:
         m_Calls:
@@ -90999,6 +91003,7 @@ MonoBehaviour:
             m_BoolArgument: 1
           m_CallState: 2
   - _config: {fileID: 11400000, guid: ecd4291116f1fee4c9a426b8d1c6ab49, type: 2}
+    count: 1
     OnItemActive:
       m_PersistentCalls:
         m_Calls:
@@ -91053,6 +91058,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
   - _config: {fileID: 11400000, guid: 425adb04cb09015418c2af3b3e8bb2cf, type: 2}
+    count: 1
     OnItemActive:
       m_PersistentCalls:
         m_Calls:
@@ -91118,6 +91124,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
   - _config: {fileID: 11400000, guid: 8f329d2fee606a643ba6acf0c77a9501, type: 2}
+    count: 1
     OnItemActive:
       m_PersistentCalls:
         m_Calls:

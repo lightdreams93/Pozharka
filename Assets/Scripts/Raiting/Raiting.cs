@@ -92,8 +92,6 @@ public class Raiting : MonoBehaviour
         }
 
         string data = JsonUtility.ToJson(levelsRaiting);
-        Debug.Log(data);
-
         PlayerPrefs.SetString("Raiting", data);
     }
 

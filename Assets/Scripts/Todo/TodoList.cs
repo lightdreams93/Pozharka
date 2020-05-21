@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class TodoList : MonoBehaviour
 {
@@ -13,6 +14,10 @@ public class TodoList : MonoBehaviour
     public static event Action<ItemConfig> OnTaskFailed;
 
     public static event Action OnAllTaskDone;
+    public UnityEvent OnAllTasksDone;
+
+    private bool _isAllTasksDone;
+    public bool IsAllTasksDone => _isAllTasksDone;
 
     private void Start()
     {
@@ -72,8 +77,13 @@ public class TodoList : MonoBehaviour
             {
                 OnTaskDone?.Invoke(_todoList[i].Config);
                 _todoList[i].DoneTask();
-                if (CheckEndGame()) 
+                if (CheckEndGame())
+                {
+                    _isAllTasksDone = true;
                     OnAllTaskDone?.Invoke();
+                    OnAllTasksDone?.Invoke();
+                }
+                    
                 return;
             }
         }

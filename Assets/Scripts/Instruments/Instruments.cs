@@ -43,7 +43,6 @@ public class Instruments : MonoBehaviour
     private void TodoList_OnTaskDone(ItemConfig item)
     {
         int indexItem = GetIndexActiveItem(_activeItem.guid);
-        //_instruments[indexItem].OnItemUse?.Invoke();
         RemoveItem();
     }
 
@@ -177,7 +176,7 @@ public class Instruments : MonoBehaviour
         if (indexItem + offset > _instruments.Count - 1)
             return null;
 
-        return _instruments[indexItem + offset].Config.Description;
+        return $"{_instruments[indexItem + offset].Config.Description} (x{_instruments[indexItem + offset].count})";
     }
 
    
@@ -220,9 +219,16 @@ public class Instruments : MonoBehaviour
     private void RemoveItem()
     {
         int indexItem = GetIndexActiveItem(_activeItem.guid);
-
-        ResetActiveItem();
-        _instruments.RemoveAt(indexItem);
+        int nextCount = _instruments[indexItem].count - 1;
+        if (nextCount > 0)
+        {
+            _instruments[indexItem].count--;
+        }
+        else
+        {
+            ResetActiveItem();
+            _instruments.RemoveAt(indexItem);
+        }
 
         DisplayInstruments(_numPage);
     }
@@ -232,6 +238,8 @@ public class Instruments : MonoBehaviour
 public class Item
 {
     [SerializeField] private ItemConfig _config;
+
+    public int count = 1;
 
     public UnityEvent OnItemActive;
     public UnityEvent OnItemUse;
