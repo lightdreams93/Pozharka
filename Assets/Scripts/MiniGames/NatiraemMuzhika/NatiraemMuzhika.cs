@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class NatiraemMuzhika : MonoBehaviour
 {
+    [SerializeField] private UIAnimation _uiAnimation;
+
     [SerializeField] private Slider _sliderBurns;
     [SerializeField] private Text _percentBurnsText;
 
@@ -74,8 +76,10 @@ public class NatiraemMuzhika : MonoBehaviour
 
     private void Update()
     {
-        if (CheckWin())
-            _winPanel.SetActive(true);
+        if (CheckWin()) {
+            _gamePanel.SetActive(false);
+            _uiAnimation.ScaleIn(_winPanel.GetComponent<RectTransform>());
+        }
     }
 
     private bool CheckWin()
@@ -93,9 +97,7 @@ public class NatiraemMuzhika : MonoBehaviour
 
     public void StartGame()
     {
-        _winPanel.SetActive(false);
-        _game.SetActive(true);
-        _gamePanel.SetActive(true);
+        _uiAnimation.ScaleIn(_game.GetComponent<RectTransform>());
     }
 
     private void DisableBurns()

@@ -41,12 +41,12 @@ public class Healthbar : MonoBehaviour
 
     private void TodoList_OnTaskFailed(ItemConfig obj)
     {
-        MultiplySpeed();
+        DecreaseHealth(10);
     }
 
     private void TodoList_OnTaskDone(ItemConfig obj)
     {
-        UndoSpeed();
+        
     }
       
     private void OnDestroy()
@@ -74,15 +74,17 @@ public class Healthbar : MonoBehaviour
         _currentSpeed = _pauseSpeed;
     }
 
-    public void MultiplyPauseSpeed()
-    {
-        _pauseSpeed *= (1  + 1 / _todoList.TodoListArr.Length);
-    }
+    //public void MultiplyPauseSpeed()
+    //{
+    //    _pauseSpeed *= (1  + 1 / _todoList.TodoListArr.Length);
+    //}
 
 
     public void DecreaseHealth(float value)
     {
+        
         float temp = _currentHealth - value;
+        Debug.Log(temp);
 
         if (temp >= 0)
         {
@@ -113,22 +115,20 @@ public class Healthbar : MonoBehaviour
         DisplayHealth();
     }
 
-    public void MultiplySpeed()
-    {
-        _currentSpeed *= (1 + 1 / (float)_todoList.TodoListArr.Length);
-    }
+    //public void MultiplySpeed()
+    //{
+    //    _currentSpeed *= (1 + 1 / (float)_todoList.TodoListArr.Length);
+    //}
 
-    
+    //public void UndoSpeed()
+    //{
+    //    float speed = _currentSpeed / (1  + 1 / (float)_todoList.TodoListArr.Length);
 
-    public void UndoSpeed()
-    {
-        float speed = _currentSpeed / (1  + 1 / (float)_todoList.TodoListArr.Length);
-
-        if (speed < _speed)
-            _currentSpeed = _speed;
-        else
-            _currentSpeed = speed;
-    }
+    //    if (speed < _speed)
+    //        _currentSpeed = _speed;
+    //    else
+    //        _currentSpeed = speed;
+    //}
 
     private void DisplayHealth()
     {

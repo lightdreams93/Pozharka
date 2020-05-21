@@ -1,10 +1,13 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class ZhgutTest : MonoBehaviour
 {
+    [SerializeField] private UIAnimation _uiAnimation;
+
     [SerializeField] private TestQuestion[] _testQuestions;
 
     [SerializeField] private Text _questionText;
@@ -17,14 +20,14 @@ public class ZhgutTest : MonoBehaviour
 
     [SerializeField] private Healthbar _healthbar;
 
+    public static event Action OnRightAnswer;
+    public static event Action OnWrongAnswer;
+
     private int _currentQuestion;
     private int _yourAnswer;
 
     private void Start()
     {
-        _winPanel.SetActive(false);
-        _gamePanel.SetActive(true);
-
         DisplayQuestion();
 
         Healthbar.OnVictumDie += Healthbar_OnVictumDie;
@@ -37,12 +40,14 @@ public class ZhgutTest : MonoBehaviour
 
     private void Healthbar_OnVictumDie()
     {
-        _game.SetActive(false);
+        //_game.SetActive(false);
+        _uiAnimation.ScaleOut(_game.GetComponent<RectTransform>());
     }
 
     public void StartGame()
     {
-        _game.SetActive(true);
+        //_game.SetActive(true);
+        _uiAnimation.ScaleIn(_game.GetComponent<RectTransform>());
     }
 
     public void Answering(int answer)
@@ -55,11 +60,15 @@ public class ZhgutTest : MonoBehaviour
     {
         int right = _testQuestions[_currentQuestion].RightIndex;
         if (_yourAnswer == right)
+        {
             NextQuestion();
+            OnRightAnswer?.Invoke();
+        }
         else
         {
             _healthbar.DecreaseHealth(_healthbar.CurrentHealth / _testQuestions.Length * (_currentQuestion + 1));
             NextQuestion();
+            OnWrongAnswer?.Invoke();
         }
             
     }
@@ -69,7 +78,8 @@ public class ZhgutTest : MonoBehaviour
         int next = _currentQuestion + 1;
         if (next > _testQuestions.Length - 1)
         {
-            _winPanel.SetActive(true);
+            //_winPanel.SetActive(true);
+            _uiAnimation.ScaleIn(_winPanel.GetComponent<RectTransform>());
             _gamePanel.SetActive(false);
             return;
         }

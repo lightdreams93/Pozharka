@@ -19,6 +19,11 @@ public class TodoList : MonoBehaviour
         Instruments.OnItemUse += Instruments_OnItemUse;
     }
 
+    private void OnDestroy()
+    {
+        Instruments.OnItemUse -= Instruments_OnItemUse;
+    }
+
     private void Instruments_OnItemUse(ItemConfig requireItem, Item item)
     {
         string taskID = GetCurrentTaskItemID();

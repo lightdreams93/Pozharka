@@ -21,6 +21,8 @@ public class Instruments : MonoBehaviour
     public static event Action<string>OnItemClicked;
     public static event Action<ItemConfig, Item>OnItemUse;
 
+    public static event Action OnPageChanged;
+
     private int _numPage;
 
     private ItemConfig _activeItem;
@@ -79,6 +81,7 @@ public class Instruments : MonoBehaviour
 
         _numPage++;
         DisplayInstruments(_numPage);
+        OnPageChanged?.Invoke();
     }
 
     public void PrevArrow()
@@ -95,6 +98,7 @@ public class Instruments : MonoBehaviour
         }
         _numPage--;
         DisplayInstruments(_numPage);
+        OnPageChanged?.Invoke();
     }
 
     private void EnableArrows()

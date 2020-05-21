@@ -1,10 +1,14 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class CprGame : MonoBehaviour
 {
+    [SerializeField] private UIAnimation _uiAnimation;
+    [SerializeField] private AudioSource _audioSource;
+
     [SerializeField] private float _maxCountHeart;
     [SerializeField] private float _maxCountMouth;
     [SerializeField] private float _maxCountCycles;
@@ -93,8 +97,11 @@ public class CprGame : MonoBehaviour
 
     private void Healthbar_OnVictumDie()
     {
-        _game.SetActive(false);
+        //_game.SetActive(false);
+        _uiAnimation.ScaleOut(_game.GetComponent<RectTransform>());
     }
+
+    
 
     private void DisplayHearts()
     {
@@ -182,7 +189,7 @@ public class CprGame : MonoBehaviour
 
     private void ActivateRandomPanel(GameObject panel)
     {
-        int randomIndex = Random.Range(0, panel.transform.childCount);
+        int randomIndex = UnityEngine.Random.Range(0, panel.transform.childCount);
         ResetPoints(panel);
         panel.transform.GetChild(randomIndex).gameObject.SetActive(true);
     }
@@ -190,23 +197,23 @@ public class CprGame : MonoBehaviour
     public void StartGame()
     {
         _isGameStart = true;
-
-        _game.SetActive(true);
-        _winPanel.SetActive(false);
-        _gamePanel.SetActive(true);
-
+         
+        _uiAnimation.ScaleIn(_game.GetComponent<RectTransform>(), OnCompleteCallback);
+        
         healthbar.PauseSpeed();
     }
 
     public void StopGame()
     {
         _isGameStart = false;
-
-        _game.SetActive(true);
-        _winPanel.SetActive(true);
-        _gamePanel.SetActive(false);
-
+        _uiAnimation.ScaleIn(_winPanel.GetComponent<RectTransform>());
+        _audioSource.Stop();
         healthbar.ResumeSpeed();
+    }
+
+    private void OnCompleteCallback()
+    {
+        _audioSource.Play();
     }
 
     private IEnumerator ActivateRandomTask()
@@ -215,7 +222,7 @@ public class CprGame : MonoBehaviour
         {
             while (_isGameStart)
             {
-                int randomIndex = Random.Range(0, 2);
+                int randomIndex = UnityEngine.Random.Range(0, 2);
                 GameObject randomPanel = (randomIndex > 0) ? _mouthPanel : _heartPanel;
                 StartCoroutine(EnableRandomPanel(randomPanel));
                 yield return new WaitForSeconds(_delayShowBtn);

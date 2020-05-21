@@ -7,6 +7,8 @@ using UnityEngine.UI;
 
 public class OrderGame : MonoBehaviour
 {
+    [SerializeField] private UIAnimation _animation;
+
     [SerializeField] private OrderCard[] _orderCards;
     [SerializeField] private float _timer; 
 
@@ -70,7 +72,7 @@ public class OrderGame : MonoBehaviour
         _cardPanel.SetActive(false);
         EndGame();
         //_todoList.DoneTask();
-        _winPanel.SetActive(true);
+        _animation.ScaleIn(_winPanel.GetComponent<RectTransform>());
         _winImage.sprite = _orderCards[_orderCards.Length - 1].Sprite;
     }
 
@@ -119,8 +121,8 @@ public class OrderGame : MonoBehaviour
     {
         _gameStart = true;
         ShowGamePanel();
+
         _cardPanel.SetActive(true);
-        _winPanel.SetActive(false);
     }
 
     public void EndGame()
@@ -198,7 +200,8 @@ public class OrderGame : MonoBehaviour
 
     private void ShowGamePanel()
     {
-        _gamePanel.SetActive(true);
+        //_gamePanel.SetActive(true);
+        _animation.ScaleIn(_gamePanel.GetComponent<RectTransform>());
     }
 
 
