@@ -15,11 +15,10 @@ public class Instruments : MonoBehaviour
 
     [SerializeField] private Button _leftArrow;
     [SerializeField] private Button _rightArrow;
-
-    [SerializeField] private TodoList _todoList;
+     
 
     public static event Action<string>OnItemClicked;
-    public static event Action<ItemConfig, Item>OnItemUse;
+    public static Action<ItemConfig, Item>OnItemUse;
 
     public static event Action OnPageChanged;
 
@@ -214,6 +213,12 @@ public class Instruments : MonoBehaviour
     {
         Item item = GetItemByID(requireItem.guid);
         OnItemUse?.Invoke(requireItem, item);
+    }
+
+    public void UseItem()
+    {
+        Item item = GetItemByID(_activeItem.guid);
+        OnItemUse?.Invoke(_activeItem, item);
     }
 
     private void RemoveItem()

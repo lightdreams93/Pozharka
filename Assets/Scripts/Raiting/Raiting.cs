@@ -5,9 +5,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Raiting : MonoBehaviour
-{
-    [SerializeField] TodoList _todoList;
-
+{ 
     [SerializeField] private GameObject _stars;
 
     [SerializeField] private Sprite _activeStar;
@@ -15,38 +13,58 @@ public class Raiting : MonoBehaviour
 
     private float _countStars;
 
+    private Healthbar _healthbar;
+
     private void Start()
     {
-        _countStars = _stars.transform.childCount;
+        _healthbar = FindObjectOfType<Healthbar>();
 
-        TodoList.OnTaskFailed += TodoList_OnTaskFailed;
-        TodoList.OnAllTaskDone += TodoList_OnAllTaskDone;
+        _countStars = _stars.transform.childCount;
+         
+
+        GameManager.OnGameWin += GameManager_OnGameWin;
     }
 
-    private void TodoList_OnAllTaskDone()
+    private void GameManager_OnGameWin()
     {
+        SetStars();
         DisplayStars();
         SaveRaiting();
     }
 
+    
+
     private void OnDestroy()
     {
-        TodoList.OnTaskFailed -= TodoList_OnTaskFailed;
-        TodoList.OnAllTaskDone -= TodoList_OnAllTaskDone;
+        GameManager.OnGameWin -= GameManager_OnGameWin;
     }
 
-    private void TodoList_OnTaskFailed(ItemConfig obj)
-    {
-        DecreaseStar();
-    }
+   
 
-    private void DecreaseStar()
+    private void SetStars()
     {
-        float temp = _countStars - 1 / (float)_todoList.TodoListArr.Length;
-        if (temp > 0)
-            _countStars = _countStars - 1 / (float)_todoList.TodoListArr.Length;
+        //float temp = _countStars - 1 / (float)_todoList.TodoListArr.Length;
+        //if (temp > 0)
+        //    _countStars = _countStars - 1 / (float)_todoList.TodoListArr.Length;
+        //else
+        //    _countStars = 0;
+
+        if (_healthbar.CurrentHealth > 50)
+        {
+            _countStars = 3;
+        }
+        else if (_healthbar.CurrentHealth > 30 && _healthbar.CurrentHealth < 50)
+        {
+            _countStars = 2;
+        }
+        else if(_healthbar.CurrentHealth < 30 && _healthbar.CurrentHealth > 20)
+        {
+            _countStars = 1;
+        }
         else
+        {
             _countStars = 0;
+        }
     }
 
     private void DisplayStars()

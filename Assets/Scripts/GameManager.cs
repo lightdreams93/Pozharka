@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -8,15 +9,25 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject _gameOverPanel;
     [SerializeField] private GameObject _winPanel;
 
+    public static event Action OnGameWin; 
+
     public static bool isLevelStarted;
 
     private TodoList[] _todoLists;
 
+    private int _countTasks;
+
+    public static List<bool> winList;
+
     private void Start()
     {
+        winList = new List<bool>();
+        winList.Clear();
+
         isLevelStarted = false;
 
         _todoLists = FindObjectsOfType<TodoList>();
+        _countTasks = _todoLists.Length;
 
         Healthbar.OnVictumDie += Healthbar_OnVictumDie;
         TodoList.OnAllTaskDone += TodoList_OnAllTaskDone;
@@ -29,21 +40,19 @@ public class GameManager : MonoBehaviour
 
     private void TodoList_OnAllTaskDone()
     {
-        if(CheckWin())
+        if (CheckWin())
         {
             _winPanel.SetActive(true);
-            Debug.Log("!!!!!");
+            OnGameWin?.Invoke();
         }
     }
 
     private bool CheckWin()
     {
-        for (int i = 0; i < _todoLists.Length; i++)
-        {
-            if (!_todoLists[i].IsAllTasksDone)
-                return false;
-        }
-        return true;
+        if (winList.Count == _countTasks)
+            return true;
+
+        return false;
     }
 
     private void Healthbar_OnVictumDie()
@@ -75,5 +84,25 @@ public class GameManager : MonoBehaviour
     public void DeleteSaves()
     {
         PlayerPrefs.DeleteAll();
+    }
+
+    public void DisableAllObjects(GameObject container)
+    {
+        for (int i = 0; i < container.transform.childCount; i++)
+        {
+            container.transform.GetChild(i).gameObject.SetActive(false);
+        }
+    }
+    public void EnableAllObjects(GameObject container)
+    {
+        for (int i = 0; i < container.transform.childCount; i++)
+        {
+            container.transform.GetChild(i).gameObject.SetActive(true);
+        }
+    }
+
+    public void DestroyGameObject(GameObject obj)
+    {
+        Destroy(obj);
     }
 }

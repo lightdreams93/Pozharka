@@ -10,9 +10,7 @@ public class Healthbar : MonoBehaviour
     [SerializeField] private float _health;
 
     [SerializeField] private float _speed = 1;
-
-    [SerializeField] private TodoList _todoList;
-
+      
     public static event Action OnVictumDie; 
 
     private float _currentHealth;
@@ -29,23 +27,23 @@ public class Healthbar : MonoBehaviour
         DisplayHealth();
 
         TodoList.OnTaskFailed += TodoList_OnTaskFailed;
-        TodoList.OnAllTaskDone += TodoList_OnAllTaskDone;
+        GameManager.OnGameWin += GameManager_OnGameWin;
     }
 
-    private void TodoList_OnAllTaskDone()
+    private void GameManager_OnGameWin()
     {
         _currentSpeed = 0;
     }
 
     private void TodoList_OnTaskFailed(ItemConfig obj)
     {
-        DecreaseHealth(10);
+        DecreaseHealth(10); 
     }
       
     private void OnDestroy()
     {
         TodoList.OnTaskFailed -= TodoList_OnTaskFailed;
-        TodoList.OnAllTaskDone -= TodoList_OnAllTaskDone;
+        GameManager.OnGameWin -= GameManager_OnGameWin;
     }
 
     private void Update()
@@ -66,7 +64,7 @@ public class Healthbar : MonoBehaviour
     }
 
     public void DecreaseHealth(float value)
-    {
+    {  
         float temp = _currentHealth - value;
 
         if (temp >= 0)

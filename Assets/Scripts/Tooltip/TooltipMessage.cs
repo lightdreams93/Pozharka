@@ -21,7 +21,7 @@ public class TooltipMessage : MonoBehaviour
 
     private void TodoList_OnTaskDone(ItemConfig obj)
     {
-        SetText("Надеюсь после этого его состояние улучшится!");
+        SetText("Задание выполнено успешно!");
     }
 
     private void TodoList_OnTaskFailed(ItemConfig obj)

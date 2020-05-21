@@ -19,14 +19,26 @@ public class TodoList : MonoBehaviour
     private bool _isAllTasksDone;
     public bool IsAllTasksDone => _isAllTasksDone;
 
+    private void OnEnable()
+    {
+        if(Instruments.OnItemUse == null)
+            Instruments.OnItemUse += Instruments_OnItemUse;
+    }
+
     private void Start()
     {
-        Instruments.OnItemUse += Instruments_OnItemUse;
+        if(Instruments.OnItemUse == null)
+            Instruments.OnItemUse += Instruments_OnItemUse;
+    }
+
+    private void OnDisable()
+    {
+        Instruments.OnItemUse = null;
     }
 
     private void OnDestroy()
     {
-        Instruments.OnItemUse -= Instruments_OnItemUse;
+        Instruments.OnItemUse = null;
     }
 
     private void Instruments_OnItemUse(ItemConfig requireItem, Item item)
@@ -79,7 +91,7 @@ public class TodoList : MonoBehaviour
                 _todoList[i].DoneTask();
                 if (CheckEndGame())
                 {
-                    _isAllTasksDone = true;
+                    GameManager.winList.Add(_isAllTasksDone);
                     OnAllTaskDone?.Invoke();
                     OnAllTasksDone?.Invoke();
                 }

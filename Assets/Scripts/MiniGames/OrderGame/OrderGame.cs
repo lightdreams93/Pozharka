@@ -23,8 +23,6 @@ public class OrderGame : MonoBehaviour
 
     //[SerializeField] private Healthbar _healthbar;
 
-    [SerializeField] private TodoList _todoList;
-
     private bool _gameStart;
     private float _currentTime;
 
