@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private GameObject _gameOverPanel;
-    [SerializeField] private GameObject _winPanel;
+    [SerializeField] private GameObject _winPanel; 
 
     public static event Action OnGameWin; 
 
@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour
 
     private int _countTasks;
 
-    public static List<bool> winList;
+    public static List<bool> winList; 
 
     private void Start()
     {

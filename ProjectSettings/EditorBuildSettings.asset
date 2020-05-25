@@ -30,6 +30,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Part2/2-1.unity
     guid: bdd43e81c0f27254ba1b10d9279a508d
   - enabled: 1
-    path: Assets/Scenes/Quiz.unity
+    path: Assets/Scenes/Exam.unity
     guid: d506495e174b2bf498076c5ec9119210
+  - enabled: 1
+    path: Assets/Scenes/QuizStart.unity
+    guid: 0acec4fcc9d9d4041954b27f3d1770bf
   m_configObjects: {}

@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class QuizStatistic : MonoBehaviour
 {
+
+    [SerializeField] private string _quizKey;
     [SerializeField] private Quiz _quiz;
     private List<Statistic> _stat;
 
@@ -20,15 +22,15 @@ public class QuizStatistic : MonoBehaviour
 
         statisticInfo = new StatisticInfo();
         statisticInfo.currentDate = GetDate();
+
         Quiz.OnAnswerSelected += Quiz_OnAnswerSelected;
         Quiz.OnQuizCompleted += Quiz_OnQuizCompleted;
     }
 
     private void Quiz_OnQuizCompleted()
     {
-        string data = JsonUtility.ToJson(statisticInfo);
-        Debug.Log(data);
-        PlayerPrefs.SetString("QuizStatistic", data);
+        string data = JsonUtility.ToJson(statisticInfo); 
+        PlayerPrefs.SetString(_quizKey, data);
 
         OnQuizStatisticDisplay?.Invoke(statisticInfo, _quizQuestions);
     }

@@ -1545,6 +1545,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e79f7d551387194dbfcc1b8850bf7bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _quizKey: StartedQuiz
   _quiz: {fileID: 488614015}
 --- !u!114 &488614018
 MonoBehaviour:

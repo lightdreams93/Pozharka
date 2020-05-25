@@ -3124,6 +3124,7 @@ GameObject:
   - component: {fileID: 672142723}
   - component: {fileID: 672142722}
   - component: {fileID: 672142724}
+  - component: {fileID: 672142725}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -3171,6 +3172,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73eb0434626eca448961f8abee1b7bae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &672142725
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 672142721}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcbe290f2a897874fb0228f514625b83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _quizKey: StartedQuiz
+  _startedScreen: {fileID: 1425369383}
 --- !u!1 &675841412
 GameObject:
   m_ObjectHideFlags: 0
@@ -6514,6 +6529,28 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 8300000, guid: 4bd77e19ee186de4893e49a76c3a25f6,
             type: 3}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 672142725}
+        m_MethodName: ShowedStartedScreen
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 672142725}
+        m_MethodName: LoadQuizLevel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
