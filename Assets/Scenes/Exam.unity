@@ -1547,6 +1547,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _quizKey: Exam
   _quiz: {fileID: 488614015}
+  _quizType: 1
 --- !u!114 &488614018
 MonoBehaviour:
   m_ObjectHideFlags: 0

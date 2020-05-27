@@ -1,13 +1,22 @@
-﻿using System;
+﻿using Proyecto26;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
+public enum QuizType
+{
+    START_QUIZ,
+    EXAM_QUIZ
+}
 
 public class QuizStatistic : MonoBehaviour
 {
 
     [SerializeField] private string _quizKey;
     [SerializeField] private Quiz _quiz;
+    [SerializeField] private QuizType _quizType;
+
     private List<Statistic> _stat;
 
     private StatisticInfo statisticInfo;
@@ -32,7 +41,31 @@ public class QuizStatistic : MonoBehaviour
         string data = JsonUtility.ToJson(statisticInfo); 
         PlayerPrefs.SetString(_quizKey, data);
 
+        RestClient.Get<UserData>(Database._database + Auth.localID + ".json", GetUserDataCallback); 
+
         OnQuizStatisticDisplay?.Invoke(statisticInfo, _quizQuestions);
+    }
+
+    private void GetUserDataCallback(RequestException arg1, ResponseHelper arg2, UserData userData)
+    {
+        try
+        {
+            if (_quizType == QuizType.EXAM_QUIZ)
+            {
+                userData.examQuiz.statistics.Add(statisticInfo);
+            }
+
+            if (_quizType == QuizType.START_QUIZ)
+            {
+                userData.startQuiz.statistics.Add(statisticInfo);
+            }
+
+            Database.SendToDatabase(userData, Auth.localID);
+        }
+        catch (Exception)
+        {
+            Debug.Log("!");
+        }
     }
 
     //private void Quiz_OnQuizInit(List<QuizQuestion> quizQuestions)

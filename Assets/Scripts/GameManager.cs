@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameManager : MonoBehaviour
+public class GameManager : SceneController
 {
     [SerializeField] private GameObject _gameOverPanel;
     [SerializeField] private GameObject _winPanel; 
@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour
 
     private int _countTasks;
 
-    public static List<bool> winList; 
+    public static List<bool> winList;
 
     private void Start()
     {
@@ -64,21 +64,6 @@ public class GameManager : MonoBehaviour
     {
         Healthbar.OnVictumDie -= Healthbar_OnVictumDie;
         TodoList.OnAllTaskDone -= TodoList_OnAllTaskDone;
-    }
-
-    public void RestartScene()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-    }
-
-    public void LoadScene(int numScene)
-    {
-        SceneManager.LoadScene(numScene);
-    }
-
-    public void ExitGame()
-    {
-        Application.Quit();
     }
 
     public void DeleteSaves()
