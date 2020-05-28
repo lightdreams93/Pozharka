@@ -40,10 +40,10 @@ public class Auth : MonoBehaviour
 
     private void SignIn(string email, string pass)
     {
+        _logText.text = "Подождите идет вход в аккаунт...";
+
         string data = "{\"email\":\"" + email + "\",\"password\":\"" + pass + "\",\"returnSecureToken\":true}";
         userEmail = email;
-        Debug.Log($"Email {userEmail}");
-
         RestClient.Post<AuthData>($"https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key={AUTH_KEY}", data, SignInCallback);
     }
 
@@ -52,7 +52,7 @@ public class Auth : MonoBehaviour
         try
         {
             localID = data.localId;
-            _logText.text = "Success";
+            _logText.text = "Успешно!";
             RestClient.Get<UserData>(Database._database + localID + ".json", RequestCallback);
             OnSignIn?.Invoke();
         }
@@ -62,7 +62,7 @@ public class Auth : MonoBehaviour
         }
     }
 
-    private void RequestCallback(RequestException arg1, ResponseHelper arg2, UserData data)
+    private void RequestCallback(RequestException exception, ResponseHelper arg2, UserData data)
     {
         try
         {
@@ -71,8 +71,7 @@ public class Auth : MonoBehaviour
         }
         catch (Exception)
         {
-
-             
+            _logText.text = exception.Message;
         }
     }
 
@@ -80,6 +79,8 @@ public class Auth : MonoBehaviour
     {
         string email = _signUpEmail.text;
         string pass = _signUpPassword.text;
+
+        _logText.text = "Подождите идет регистрация...";
 
         string data = "{\"email\":\"" + email + "\",\"password\":\"" + pass + "\",\"returnSecureToken\":true}";
 

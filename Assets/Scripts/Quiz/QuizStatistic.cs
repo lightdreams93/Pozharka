@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum QuizType
 {
@@ -16,6 +17,8 @@ public class QuizStatistic : MonoBehaviour
     [SerializeField] private string _quizKey;
     [SerializeField] private Quiz _quiz;
     [SerializeField] private QuizType _quizType;
+
+    [SerializeField] private Text _logText;
 
     private List<Statistic> _stat;
 
@@ -41,12 +44,16 @@ public class QuizStatistic : MonoBehaviour
         string data = JsonUtility.ToJson(statisticInfo); 
         PlayerPrefs.SetString(_quizKey, data);
 
-        RestClient.Get<UserData>(Database._database + Auth.localID + ".json", GetUserDataCallback); 
+        if (GameModeSettings.onlineMode)
+        {
+            _logText.text = "Подождите идет сохранение данных...";
+            RestClient.Get<UserData>(Database._database + Auth.localID + ".json", GetUserDataCallback);
+        }
 
         OnQuizStatisticDisplay?.Invoke(statisticInfo, _quizQuestions);
     }
 
-    private void GetUserDataCallback(RequestException arg1, ResponseHelper arg2, UserData userData)
+    private void GetUserDataCallback(RequestException exception, ResponseHelper response, UserData userData)
     {
         try
         {
@@ -61,12 +68,15 @@ public class QuizStatistic : MonoBehaviour
             }
 
             Database.SendToDatabase(userData, Auth.localID);
+            _logText.text = "Данные успешно сохранены!";
         }
         catch (Exception)
         {
-            Debug.Log("!");
+            _logText.text = exception.Message;
         }
     }
+
+     
 
     //private void Quiz_OnQuizInit(List<QuizQuestion> quizQuestions)
     //{
@@ -78,7 +88,11 @@ public class QuizStatistic : MonoBehaviour
 
     private void Quiz_OnAnswerSelected(int answer, int rightAnswer, bool isRightAnswer)
     {
-        statisticInfo.statistics.Add(new Statistic(_quiz.CurrentQuestion, answer, rightAnswer));
+        string question = _quiz.QuizQuestionsSelected[_quiz.CurrentQuestion].Question;
+        string answerText = _quiz.QuizQuestionsSelected[_quiz.CurrentQuestion].Answers[answer];
+        string rightAnswerText = _quiz.QuizQuestionsSelected[_quiz.CurrentQuestion].Answers[rightAnswer];
+
+        statisticInfo.statistics.Add(new Statistic(question, answerText, rightAnswerText, isRightAnswer));
     }
 
     private string GetDate()
@@ -113,14 +127,16 @@ public class StatisticInfo
 [System.Serializable]
 public class Statistic
 {
-    public int currentQuestion;
-    public int answer;
-    public int rightAnswer;
+    public string currentQuestion;
+    public string answer;
+    public string rightAnswer;
+    public bool right;
 
-    public Statistic(int currentQuestion, int answer, int rightAnswer)
+    public Statistic(string currentQuestion, string answer, string rightAnswer, bool right)
     {
         this.currentQuestion = currentQuestion;
         this.answer = answer;
         this.rightAnswer = rightAnswer;
+        this.right = right;
     }
 }
