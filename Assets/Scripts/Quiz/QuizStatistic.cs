@@ -101,8 +101,10 @@ public class QuizStatistic : MonoBehaviour
         string day = dt.Day.ToString();
         string month = dt.Month.ToString();
         string year = dt.Year.ToString();
+        string hours = dt.Hour.ToString();
+        string minutes = dt.Minute.ToString();
 
-        return $"{day}/{month}/{year}";
+        return $"{day}/{month}/{year}/{hours}:{minutes}";
     }
 
     private void OnDestroy()
