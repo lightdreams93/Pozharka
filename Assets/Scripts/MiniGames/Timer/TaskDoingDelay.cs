@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class TaskDoingDelay : MonoBehaviour
@@ -9,6 +10,10 @@ public class TaskDoingDelay : MonoBehaviour
     [SerializeField] private Slider _slider;
     [SerializeField] private float _delay;
     [SerializeField] private TodoList _todoList;
+
+
+    [SerializeField] private UnityEvent OnTimerStarted;
+    [SerializeField] private UnityEvent OnTimerEnded;
 
     private bool _isGameStarted;
     private float _currentTime;
@@ -19,6 +24,8 @@ public class TaskDoingDelay : MonoBehaviour
 
         _slider.maxValue = _currentTime;
         _slider.value = _currentTime;
+
+        OnTimerStarted?.Invoke();
 
         _isGameStarted = true;
         _gamePanel.SetActive(true);
@@ -38,6 +45,7 @@ public class TaskDoingDelay : MonoBehaviour
             _todoList.DoneTask();
             _isGameStarted = false;
             _gamePanel.SetActive(false);
+            OnTimerEnded?.Invoke();
         }
     }
 }

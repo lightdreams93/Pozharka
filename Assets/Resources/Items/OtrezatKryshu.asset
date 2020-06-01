@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cab1379547db9eb469c73e6b11b0a63e, type: 3}
+  m_Name: OtrezatKryshu
+  m_EditorClassIdentifier: 
+  guid: f740f31e76af58d47a56f6309d798cab
+  _isMiniGame: 0
+  _icon: {fileID: 21300000, guid: 8da0b30bb926da1499c533515b6b3297, type: 3}
+  _description: "\u041D\u043E\u0436\u043D\u0438\u0446\u044B \u043F\u043E \u043C\u0435\u0442\u0430\u043B\u043B\u0443"

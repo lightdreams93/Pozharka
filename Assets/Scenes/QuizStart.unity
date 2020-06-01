@@ -1595,7 +1595,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 1a40d46f166b9714f80562d748f81f08, type: 2}
   - {fileID: 11400000, guid: 627f31aa4b586154e9e2894d01105c4c, type: 2}
   - {fileID: 11400000, guid: 00a95ca6562c3fd4db9e13cce2ff4a23, type: 2}
-  _countQuestions: 10
+  _countQuestions: 5
   _delay: 3
 --- !u!4 &488614016
 Transform:
