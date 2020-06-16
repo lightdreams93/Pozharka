@@ -6,10 +6,10 @@ using UnityEngine;
 
 public class Database : MonoBehaviour
 {
-    public static string _database = "https://pozharka-3206f.firebaseio.com/";
+    public static string databaseUrl = "https://pozharka-3206f.firebaseio.com/";
 
     public static void SendToDatabase(UserData userData, string separator)
     {
-        RestClient.Put<UserData>(_database + separator + ".json", userData);
+        RestClient.Put<UserData>(databaseUrl + separator + ".json", userData);
     }
 }

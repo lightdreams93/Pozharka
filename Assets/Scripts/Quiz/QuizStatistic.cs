@@ -43,11 +43,12 @@ public class QuizStatistic : MonoBehaviour
     {
         string data = JsonUtility.ToJson(statisticInfo); 
         PlayerPrefs.SetString(_quizKey, data);
+        Debug.Log(data);
 
         if (GameModeSettings.onlineMode)
         {
             _logText.text = "Подождите идет сохранение данных...";
-            RestClient.Get<UserData>(Database._database + Auth.localID + ".json", GetUserDataCallback);
+            RestClient.Get<UserData>(Database.databaseUrl + Auth.localID + ".json", GetUserDataCallback);
         }
 
         OnQuizStatisticDisplay?.Invoke(statisticInfo, _quizQuestions);
@@ -101,8 +102,8 @@ public class QuizStatistic : MonoBehaviour
         string day = dt.Day.ToString();
         string month = dt.Month.ToString();
         string year = dt.Year.ToString();
-        string hours = dt.Hour.ToString();
-        string minutes = dt.Minute.ToString();
+        string hours = (dt.Hour < 10) ? $"0{dt.Hour}" : dt.Hour.ToString();
+        string minutes = (dt.Minute < 10) ? $"0{dt.Minute}" : dt.Minute.ToString(); ;
 
         return $"{day}/{month}/{year}/{hours}:{minutes}";
     }

@@ -11,16 +11,20 @@ public class UserData
     public string userName;
     public string userSurname;
 
+    public string keyWord;
+    public int timeGame;
+
     public QuizData startQuiz;
     public QuizData examQuiz;
 
-    public UserData(string userName, string userSurname)
+    public UserData(string userName, string userSurname, string keyWord)
     {
         startQuiz = new QuizData();
         examQuiz = new QuizData();
 
         this.userName = userName;
         this.userSurname = userSurname;
+        this.keyWord = keyWord;
     }
 }
 
